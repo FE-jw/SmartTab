@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>SmartTab</title>
+<style>
+	*	{margin:0;padding:0;list-style:none;}
+	body	{line-height:1.2;font-size:14px;color:#000;}
+
+	/* SmartTab */
+	.st-wrap	{width:900px;margin:0 auto;padding:40px 0;}
+	.st-wrap .tab-btn	{display:flex;}
+	.st-wrap .tab-btn li	{flex:1;}
+	.st-wrap .tab-btn a	{display:flex;justify-content:center;align-items:center;height:50px;font-size:20px;font-weight:bold;color:inherit;text-align:center;text-decoration:none;background-color:rgba(0, 0, 0, 0.1);}
+	.st-wrap .tab-btn a:hover	{color:#fff;background-color:#000;}
+	.st-wrap .tab-content	{display:none;height:400px;background-color:green;}
+	.st-wrap .tab-content.on	{display:block;}
+</style>
+</head>
+<body>
+	<div class="st-wrap">
+		<ul class="tab-btn">
+			<li><a href="#">Tab 1</a></li>
+			<li><a href="#">Tab 2</a></li>
+			<li><a href="#">Tab 3</a></li>
+		</ul>
+		<section class="tab-content st-1 on">
+			<h1 class="tab-tit">Tab 1</h1>
+			<a href="#">링크 테스트</a>
+			<p class="tab-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non ipsam modi deserunt ducimus, facere aperiam. Consequuntur maiores voluptate quos! Aliquam quo voluptates ullam, dolor quibusdam consectetur exercitationem assumenda architecto facilis!</p>
+		</section>
+		<section class="tab-content st-2">
+			<h1 class="tab-tit">Tab 2</h1>
+			<a href="#">링크 테스트</a>
+			<p class="tab-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque deleniti autem omnis consequatur ullam at delectus voluptate quasi recusandae, esse tempora, velit debitis nesciunt laborum?</p>
+		</section>
+		<section class="tab-content st-3">
+			<h1 class="tab-tit">Tab 3</h1>
+			<a href="#">링크 테스트</a>
+			<p class="tab-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo quidem incidunt mollitia nihil dolores culpa, saepe autem architecto consequuntur dignissimos recusandae eligendi, dolorem cumque. Consequuntur enim porro doloremque ea explicabo mollitia similique quidem?</p>
+		</section>
+	</div>
+</body>
+<script src="SmartTab.js"></script>
+<script>
+	const myTab = new SmartTab({
+		btnEle: '.tab-btn',
+		contentEle: '.tab-content'
+	});
+
+	console.log('myTab.callBtn: ', myTab.callBtn());
+	console.log('myTab.callCont: ', myTab.callCont());
+</script>
+</html>
