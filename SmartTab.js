@@ -4,77 +4,89 @@ class SmartTab{
 		const btnLists = Array.prototype.slice.call(btnWrap.querySelectorAll('li'));
 		const btns = Array.prototype.slice.call(btnWrap.querySelectorAll('a'));
 		const contents = Array.prototype.slice.call(document.querySelectorAll(options.contentEle));
-		let beforeActiveIndex;
-		let currentActiveIndex;
+		let currentActiveIndex = typeof options.firstTabIndex !== 'undefined' ? options.firstTabIndex : 0;
 
-		//Accessibility Settings
-		btnWrap.setAttribute('role', 'tablist');
+		btnWrap.role = 'tablist';
 	
 		btnLists.forEach((ele, index) => {
-			ele.setAttribute('role', 'none');
-			ele.dataset.index = index;
+			ele.role = 'none'
+			ele.querySelector('a').dataset.index = index;
 		});
 	
 		btns.forEach(ele => {
-			let tabHash = ele.hash.replace('#', '');
-
-			ele.setAttribute('role', 'tab');
-			ele.setAttribute('aria-selected', 'false');
-			ele.setAttribute('aria-controls', tabHash);
+			ele.role = 'tab';
+			ele.ariaSelected = false;
+			ele.setAttribute('aria-controls', ele.hash.replace('#', ''));
 
 			//Click on the A tag
 			ele.addEventListener('click', function(e){
 				e.preventDefault();
-	
-				let selected = this.getAttribute('aria-selected');
+
+				let selected = this.ariaSelected;
+				let currentIndex = this.dataset.index;
+				let beforeTab;
+				let beforeIndex;
+				let currentTabHash = this.getAttribute('aria-controls');
 	
 				if(selected == 'false'){
-					if(!btnWrap.querySelector('a[aria-selected=true]')){
-						//First click
-					}else{
+					if(btnWrap.querySelector('a[aria-selected=true]')){
 						//Not the first click
-						btnWrap.querySelector('a[aria-selected=true]').setAttribute('aria-selected', false);
-						btnWrap.querySelector('a.active').classList.remove('active');
+						let _this = btnWrap.querySelector('a[aria-selected=true]');
+						beforeIndex = _this.dataset.index;
+						beforeTab = _this.getAttribute('aria-controls');
+
+						_this.ariaSelected = false;
+						_this.classList.remove('active');
+
+						if(!options.cssClassMode){
+							document.getElementById(beforeTab).style.display = 'none';
+						}else{
+							document.getElementById(beforeTab).classList.remove(options.cssClassMode);
+						}
 					}
 
-					this.setAttribute('aria-selected', true);
+					this.ariaSelected = true;
 					this.classList.add('active');
-					currentActiveIndex = this.parentElement.dataset.index;
 
-					console.log('currentActiveIndex: ', currentActiveIndex);
+					if(!options.cssClassMode){
+						console.log(document.getElementById(currentTabHash));
+						document.getElementById(currentTabHash).style.display = '';
+					}else{
+						document.getElementById(currentTabHash).classList.add(options.cssClassMode);
+					}
+
+					currentActiveIndex = currentIndex;
 				}
 	
 				let winTop = window.scrollY;
-				document.getElementById(tabHash).style.display = '';
-				document.getElementById(tabHash).focus();
+				document.getElementById(currentTabHash).style.display = '';
+				document.getElementById(currentTabHash).focus();
 				window.scrollTo(0, winTop);
 			});
 		});
-	
+
 		contents.forEach(ele => {
-			ele.setAttribute('role', 'tabpanel');
+			ele.role = 'tabpanel';
 			ele.tabIndex = 0;
+
+			if(!options.cssClassMode){
+				ele.style.display = 'none';
+			}
 
 			if(!options.tabOutline){
 				ele.style.outline = 'none';
 			}
 		});
 
-		this.btnWrap = btnWrap;
-		this.btnLists = btnLists;
-		this.btns = btns;
-		this.contents = contents;
-	}
+		//Init
+		let initTab = document.querySelector('a[data-index="' + currentActiveIndex + '"]');
+		initTab.classList.add('active');
+		initTab.ariaSelected = true;
 
-	changeTab(){
-		console.log('changeTab');
-	}
-
-	callBtn(){
-		return this.btns;
-	}
-
-	callCont(){
-		return this.contents;
+		if(!options.cssClassMode){
+			document.getElementById(initTab.getAttribute('aria-controls')).style.display = '';
+		}else{
+			document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssClassMode);
+		}
 	}
 }

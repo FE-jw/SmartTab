@@ -16,12 +16,14 @@
 	.st-wrap .tab-btn a	{display:flex;justify-content:center;align-items:center;height:50px;font-size:20px;font-weight:bold;color:inherit;text-align:center;text-decoration:none;background-color:rgba(0, 0, 0, 0.1);}
 	.st-wrap .tab-btn a:hover	{color:#fff;background-color:rgba(0, 0, 0, 0.2);}
 	.st-wrap .tab-btn a.active	{color:#fff;background-color:#000;}
-	.st-wrap .tab-content	{height:400px;}
 	.st-wrap .tab-content#ST-1	{background-color:lightgreen;}
 	.st-wrap .tab-content#ST-2	{background-color:lightyellow;}
 	.st-wrap .tab-content#ST-3	{background-color:lightblue;}
-	/* .st-wrap .tab-content	{display:none;} */
-	.st-wrap .tab-content.on	{display:block;}
+	.st-wrap .tab-content	{display:none;height:400px;padding:40px;box-sizing:border-box;}
+	.st-wrap .tab-content.active	{display:block;}
+	.st-wrap .tab-content .tab-tit	{margin-bottom:20px;font-size:30px;}
+	.st-wrap .tab-content a	{font-size:20px;}
+	.st-wrap .tab-content .tab-desc	{margin-top:20px;font-size:16px;}
 </style>
 </head>
 <body>
@@ -32,19 +34,19 @@
 			<li><a href="#ST-3">Tab 3</a></li>
 		</ul>
 		<section id="ST-1" class="tab-content">
-			<h1 class="tab-tit">Tab 1</h1>
+			<h1 class="tab-tit">탭 1</h1>
 			<a href="#">링크 테스트</a>
-			<p class="tab-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non ipsam modi deserunt ducimus, facere aperiam. Consequuntur maiores voluptate quos! Aliquam quo voluptates ullam, dolor quibusdam consectetur exercitationem assumenda architecto facilis!</p>
+			<p class="tab-desc">"탭 1" 버튼 클릭 후 키보드 Tab 키를 눌러보세요.<br>포커스가 탭 1로 이동됩니다.</p>
 		</section>
-		<section id="ST-2" class="tab-content" style="display:none;">
-			<h1 class="tab-tit">Tab 2</h1>
+		<section id="ST-2" class="tab-content">
+			<h1 class="tab-tit">탭 2</h1>
 			<a href="#">링크 테스트</a>
-			<p class="tab-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque deleniti autem omnis consequatur ullam at delectus voluptate quasi recusandae, esse tempora, velit debitis nesciunt laborum?</p>
+			<p class="tab-desc">"탭 2" 버튼 클릭 후 키보드 Tab 키를 눌러보세요.<br>포커스가 탭 2로 이동됩니다.</p>
 		</section>
-		<section id="ST-3" class="tab-content" style="display:none;">
-			<h1 class="tab-tit">Tab 3</h1>
+		<section id="ST-3" class="tab-content">
+			<h1 class="tab-tit">탭 3</h1>
 			<a href="#">링크 테스트</a>
-			<p class="tab-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo quidem incidunt mollitia nihil dolores culpa, saepe autem architecto consequuntur dignissimos recusandae eligendi, dolorem cumque. Consequuntur enim porro doloremque ea explicabo mollitia similique quidem?</p>
+			<p class="tab-desc">"탭 3" 버튼 클릭 후 키보드 Tab 키를 눌러보세요.<br>포커스가 탭 3으로 이동됩니다.</p>
 		</section>
 	</div>
 </body>
@@ -53,30 +55,11 @@
 	const myTab = new SmartTab({
 		btnEle: '.tab-btn',
 		contentEle: '.tab-content',
+		// firstTabIndex: 1,
+		cssClassMode: 'active',
 		tabOutline: false
 	});
-
-	// contole.log('myTab.callBtn: ', myTab.callBtn());
-	// console.log('myTab.callCont: ', myTab.callCont());
 </script>
 </html>
 
 <!-- https://nuli.navercorp.com/tool/waiAria -->
-
-<!-- 
-<ul role="tablist">
-	<li role="none"><a href="#" role="tab" aria-selected="true" aria-controls="tab_ui">탭1</a></li>
-	<li role="none"><a href="#" role="tab" aria-selected="false" aria-controls="tab_ac">탭2</a></li>
-	<li role="none"><a href="#" role="tab" aria-selected="false" aria-controls="tab_se">탭3</a></li>
-</ul>
-<div id="tab_ui" role="tabpanel" aria-labelledby="ui" tabindex="0">
-	첫번째 탭 내용
-</div>
-<div id="tab_ac" role="tabpanel" aria-labelledby="ac" tabindex="0" style="display:none">
-	두번째 탭 내용
-</div>
-<div id="tab_se" role="tabpanel" aria-labelledby="se" tabindex="0" style="display:none">
-	세번째 탭 내용
-</div>
-
- -->
