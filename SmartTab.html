@@ -7,6 +7,7 @@
 <title>SmartTab</title>
 <style>
 	*	{margin:0;padding:0;list-style:none;}
+	html	{font-size:10px;}
 	body	{line-height:1.2;font-size:14px;color:#000;}
 
 	/* SmartTab */
@@ -55,11 +56,14 @@
 	const myTab = new SmartTab({
 		btnEle: '.tab-btn',
 		contentEle: '.tab-content',
-		// firstTabIndex: 1,
+		firstTabIndex: 0,
 		cssClassMode: 'active',
 		tabOutline: false
 	});
+
+	//탭 전환 후
+	myTab.changeTab(function(){
+		console.log('myTab changeTab callback test');
+	});
 </script>
 </html>
-
-<!-- https://nuli.navercorp.com/tool/waiAria -->
