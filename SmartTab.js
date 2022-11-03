@@ -7,17 +7,21 @@ class SmartTab{
 		this.contents = Array.prototype.slice.call(document.querySelectorAll(options.contentEle));
 		this.currentActiveIndex = typeof options.firstTabIndex !== 'undefined' ? options.firstTabIndex : 0;
 
+		this.a11y();
 		this.init();
-		this.changeTab();
+		
+		setTimeout(() => {
+			this.changeTab();
+			
+		}, 500);
 	}
 
-	init(){
+	a11y(){
 		let options = this.options;
 		let btnWrap = this.btnWrap;
 		let btnLists = this.btnLists;
 		let btns = this.btns;
 		let contents = this.contents;
-		let currentActiveIndex = this.currentActiveIndex;
 
 		btnWrap.role = 'tablist';
 		
@@ -36,25 +40,21 @@ class SmartTab{
 			ele.role = 'tabpanel';
 			ele.tabIndex = 0;
 	
-			if(!options.cssClassMode){
-				ele.style.display = 'none';
-			}
-	
 			if(!options.tabOutline){
 				ele.style.outline = 'none';
 			}
 		});
+	}
+
+	init(){
+		let options = this.options;
+		let currentActiveIndex = this.currentActiveIndex;
 	
 		//First Active Tab
 		let initTab = document.querySelector('a[data-index="' + currentActiveIndex + '"]');
-		initTab.classList.add('active');
+		initTab.classList.add(options.cssModeClass);
 		initTab.ariaSelected = true;
-	
-		if(!options.cssClassMode){
-			document.getElementById(initTab.getAttribute('aria-controls')).style.display = '';
-		}else{
-			document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssClassMode);
-		}
+		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssModeClass);
 	}
 
 	changeTab(callback){
@@ -62,18 +62,16 @@ class SmartTab{
 		let btnWrap = this.btnWrap;
 		let btns = this.btns;
 		let currentActiveIndex = this.currentActiveIndex;
-		
+
 		btns.forEach(ele => {
 			ele.addEventListener('click', function(e){
 				e.preventDefault();
 	
 				let beforeTab;
 				let beforeIndex;
-				let selected = this.ariaSelected;
-				let currentIndex = this.dataset.index;
 				let currentTabHash = this.getAttribute('aria-controls');
 	
-				if(selected == 'false'){
+				if(this.ariaSelected == 'false'){
 					//Not the first click
 					if(btnWrap.querySelector('a[aria-selected=true]')){
 						let _this = btnWrap.querySelector('a[aria-selected=true]');
@@ -81,35 +79,25 @@ class SmartTab{
 						beforeTab = _this.getAttribute('aria-controls');
 	
 						_this.ariaSelected = false;
-						_this.classList.remove('active');
+						_this.classList.remove(options.cssModeClass);
 	
-						if(!options.cssClassMode){
-							document.getElementById(beforeTab).style.display = 'none';
-						}else{
-							document.getElementById(beforeTab).classList.remove(options.cssClassMode);
-						}
+						document.getElementById(beforeTab).classList.remove(options.cssModeClass);
+
 					}
 	
 					this.ariaSelected = true;
-					this.classList.add('active');
+					this.classList.add(options.cssModeClass);
 	
-					if(!options.cssClassMode){
-						console.log(document.getElementById(currentTabHash));
-						document.getElementById(currentTabHash).style.display = '';
-					}else{
-						document.getElementById(currentTabHash).classList.add(options.cssClassMode);
-					}
+					let winTop = window.scrollY;
+					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
+					document.getElementById(currentTabHash).focus();
+					window.scrollTo(0, winTop);
 	
-					currentActiveIndex = currentIndex;
-				}
-	
-				let winTop = window.scrollY;
-				document.getElementById(currentTabHash).style.display = '';
-				document.getElementById(currentTabHash).focus();
-				window.scrollTo(0, winTop);
+					currentActiveIndex = this.dataset.index;
 
-				//Callback
-				callback && callback();
+					//Callback
+					callback && callback(this, currentActiveIndex);
+				}
 			});
 		});
 	}
