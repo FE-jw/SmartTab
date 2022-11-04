@@ -9,11 +9,7 @@ class SmartTab{
 
 		this.a11y();
 		this.init();
-		
-		setTimeout(() => {
-			this.changeTab();
-			
-		}, 500);
+		this.changeTab();
 	}
 
 	a11y(){
@@ -61,42 +57,34 @@ class SmartTab{
 		let options = this.options;
 		let btnWrap = this.btnWrap;
 		let btns = this.btns;
-		let currentActiveIndex = this.currentActiveIndex;
 
 		btns.forEach(ele => {
 			ele.addEventListener('click', function(e){
 				e.preventDefault();
 	
-				let beforeTab;
-				let beforeIndex;
-				let currentTabHash = this.getAttribute('aria-controls');
-	
 				if(this.ariaSelected == 'false'){
-					//Not the first click
 					if(btnWrap.querySelector('a[aria-selected=true]')){
+						//Not the first click
 						let _this = btnWrap.querySelector('a[aria-selected=true]');
-						beforeIndex = _this.dataset.index;
-						beforeTab = _this.getAttribute('aria-controls');
+						let beforeTab = _this.getAttribute('aria-controls');
 	
 						_this.ariaSelected = false;
 						_this.classList.remove(options.cssModeClass);
 	
 						document.getElementById(beforeTab).classList.remove(options.cssModeClass);
-
 					}
 	
 					this.ariaSelected = true;
 					this.classList.add(options.cssModeClass);
 	
 					let winTop = window.scrollY;
+					let currentTabHash = this.getAttribute('aria-controls');
 					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
 					document.getElementById(currentTabHash).focus();
 					window.scrollTo(0, winTop);
-	
-					currentActiveIndex = this.dataset.index;
-
-					//Callback
-					callback && callback(this, currentActiveIndex);
+					
+					//callback
+					callback && callback(this, this.dataset.index);
 				}
 			});
 		});
