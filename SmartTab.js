@@ -1,3 +1,10 @@
+/**
+ * Version: 1
+ * Web: https://fe-jw.github.io/SmartTab
+ * GitHub: https://github.com/FE-jw/SmartTab
+ * Released: 2022-11-07
+*/
+
 class SmartTab{
 	constructor(options){
 		this.options = options;
@@ -9,7 +16,6 @@ class SmartTab{
 
 		this.a11y();
 		this.init();
-		this.changeTab();
 	}
 
 	a11y(){
@@ -63,16 +69,13 @@ class SmartTab{
 				e.preventDefault();
 	
 				if(this.ariaSelected == 'false'){
-					if(btnWrap.querySelector('a[aria-selected=true]')){
-						//Not the first click
-						let _this = btnWrap.querySelector('a[aria-selected=true]');
-						let beforeTab = _this.getAttribute('aria-controls');
-	
-						_this.ariaSelected = false;
-						_this.classList.remove(options.cssModeClass);
-	
-						document.getElementById(beforeTab).classList.remove(options.cssModeClass);
-					}
+					//Not the first click
+					let _this = btnWrap.querySelector('a[aria-selected=true]');
+					let beforeTab = _this.getAttribute('aria-controls');
+
+					_this.ariaSelected = false;
+					_this.classList.remove(options.cssModeClass);
+					document.getElementById(beforeTab).classList.remove(options.cssModeClass);
 	
 					this.ariaSelected = true;
 					this.classList.add(options.cssModeClass);
@@ -82,7 +85,7 @@ class SmartTab{
 					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
 					document.getElementById(currentTabHash).focus();
 					window.scrollTo(0, winTop);
-					
+
 					//callback
 					callback && callback(this, this.dataset.index);
 				}

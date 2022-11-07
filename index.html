@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>Smart Tab</title>
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fe-jw/fe-jw.github.io/css/font.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/css/highlight-material-11.4.0.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/css/style.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fe-jw/STA/Ver1.4/sta.min.css">
+</head>
+
+<body>
+<a href="#container" class="skip-content">Skip To Content</a>
+<div class="st-wrap">
+	<header class="header">
+		<div class="header-wrap">
+			<h1 class="main-tit" data-sta>
+				<span class="name">Smart Tab</span>
+				<span class="ver">Ver 1</span>
+			</h1>
+			<p class="main-desc">
+				<span class="desc" data-sta data-sta-delay="200">Tab Contents Switching Plugin</span>
+				<span class="desc" data-sta data-sta-delay="400">Only Vanilla JS</span>
+			</p>
+		</div>
+	</header>
+	<div class="container" id="container">
+		<section class="section">
+			<div class="content">
+				<h2 class="sub-tit" data-sta>Example</h2>
+				<p class="sub-desc" data-sta>Click the tab button <br data-break-1>to move the focus to that content.<br>Click the tab button and <br data-break-1>press the keyboard Tab key.</p>
+				<div class="tab-wrap" data-sta data-sta-offsete="0.3">
+					<ul class="tab-btn">
+						<li><a href="#ST-1">Tab 1</a></li>
+						<li><a href="#ST-2">Tab 2</a></li>
+						<li><a href="#ST-3">Tab 3</a></li>
+					</ul>
+					<div id="ST-1" class="tab-content">
+						Tab 1
+						<br><br>
+						<button type="button">Focus Test</button>
+						<br><br>
+						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+					</div>
+					<div id="ST-2" class="tab-content">
+						Tab 2
+						<br><br>
+						<button type="button">Focus Test</button>
+						<br><br>
+						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+					</div>
+					<div id="ST-3" class="tab-content">
+						Tab 3
+						<br><br>
+						<button type="button">Focus Test</button>
+						<br><br>
+						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="section start">
+			<div class="content">
+				<h2 class="sub-tit" data-sta>Get Started</h2>
+				<ol class="how-to-start">
+					<li data-sta>
+						<h3 class="step-tit">Add Markup</h3>
+						<div class="code-wrap">
+							<pre><code class="html">&lt;ul class="your-class-1"&gt;
+	&lt;li&gt;&lt;a href="#ST-1"&gt;Tab 1&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="#ST-2"&gt;Tab 2&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="#ST-3"&gt;Tab 3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id="ST-1" class="your-class-2"&gt;
+	Tab 1
+&lt;/div&gt;
+&lt;div id="ST-2" class="your-class-2"&gt;
+	Tab 2
+&lt;/div&gt;
+&lt;div id="ST-3" class="your-class-2"&gt;
+	Tab 3
+&lt;/div&gt;</code></pre>
+						</div>
+					</li>
+					<li data-sta>
+						<h3 class="step-tit">Add CSS</h3>
+						<div class="code-wrap">
+							<pre><code class="css">.your-class-2	{display:none;}
+.your-class-2.active	{display:block;}</code></pre>
+						</div>
+					</li>
+					<li data-sta>
+						<h3 class="step-tit">Add JS</h3>
+						<div class="code-wrap">
+							<pre><code class="html">&lt;!-- Don't add my CDN in your project. I recommend adding it to your CDN --&gt;
+&lt;script src="<a href="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/SmartTab.min.js" target="_blank">https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/SmartTab.min.js</a>"&gt;&lt;/script&gt;</code></pre>
+						</div>
+					</li>
+					<li data-sta>
+						<h3 class="step-tit">Initialize</h3>
+						<div class="code-wrap">
+							<pre><code class="javascript">const myTab = new SmartTab({
+	//Required
+	btnEle: '.your-class-1',
+	contentEle: '.your-class-2',
+	cssModeClass: 'active',
+
+	//Optional
+	firstTabIndex: 0,	//Index of the tab content to be displayed first(Default is 0)
+	tabOutline: false	//Determines whether the tab content has a style outline(Default is false)
+});</code></pre>
+						</div>
+					</li>
+					<li data-sta>
+						<h3 class="step-tit">Method</h3>
+						<div class="code-wrap">
+							<pre><code class="javascript">//changeTab
+myTab.changeTab(function(evt, index){
+	console.log('evt: ', evt);
+	console.log('currentActiveIndex: ', index);
+});</code></pre>
+						</div>
+					</li>
+				</ol>
+				<a href="https://github.com/FE-jw/SmartTab" class="link-default arrow" target="_blank" data-sta>View on GiHub</a>
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<address class="copyright">&copy; JW</address>
+	</footer>
+	<button type="button" class="btn-top" title="scroll up to the top">scroll up to the top</button>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/js/highlight-8.7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fe-jw/STA/Ver1.4/sta.min.js"></script>
+<script>
+	/**
+	 * Version: 1
+	 * Web: https://fe-jw.github.io/SmartTab
+	 * GitHub: https://github.com/FE-jw/SmartTab
+	 * Released: 2022-11-07
+	*/
+
+	class SmartTab{constructor(t){this.options=t,this.btnWrap=document.querySelector(t.btnEle),this.btnLists=Array.prototype.slice.call(this.btnWrap.querySelectorAll("li")),this.btns=Array.prototype.slice.call(this.btnWrap.querySelectorAll("a")),this.contents=Array.prototype.slice.call(document.querySelectorAll(t.contentEle)),this.currentActiveIndex=void 0!==t.firstTabIndex?t.firstTabIndex:0,this.a11y(),this.init()}a11y(){let t=this.options,e=this.btnWrap,s=this.btnLists,a=this.btns,i=this.contents;e.role="tablist",s.forEach((t,e)=>{t.role="none",t.querySelector("a").dataset.index=e}),a.forEach(t=>{t.role="tab",t.ariaSelected=!1,t.setAttribute("aria-controls",t.hash.replace("#",""))}),i.forEach(e=>{e.role="tabpanel",e.tabIndex=0,t.tabOutline||(e.style.outline="none")})}init(){let t=this.options,e=this.currentActiveIndex,s=document.querySelector('a[data-index="'+e+'"]');s.classList.add(t.cssModeClass),s.ariaSelected=!0,document.getElementById(s.getAttribute("aria-controls")).classList.add(t.cssModeClass)}changeTab(t){let e=this.options,s=this.btnWrap,a=this.btns;a.forEach(a=>{a.addEventListener("click",function(a){if(a.preventDefault(),"false"==this.ariaSelected){let a=s.querySelector("a[aria-selected=true]"),i=a.getAttribute("aria-controls");a.ariaSelected=!1,a.classList.remove(e.cssModeClass),document.getElementById(i).classList.remove(e.cssModeClass),this.ariaSelected=!0,this.classList.add(e.cssModeClass);let l=window.scrollY,r=this.getAttribute("aria-controls");document.getElementById(r).classList.add(e.cssModeClass),document.getElementById(r).focus(),window.scrollTo(0,l),t&&t(this,this.dataset.index)}})})}}
+</script>
+<script>
+hljs.initHighlightingOnLoad();
+
+const myTab = new SmartTab({
+	btnEle: '.tab-btn',
+	contentEle: '.tab-content',
+	cssModeClass: 'active'
+});
+
+//changeTab Method
+myTab.changeTab(function(evt, index){
+	console.log('evt: ', evt);
+	console.log('currentActiveIndex: ', index);
+});
+
+window.addEventListener('load', function(){
+	//Loading
+	setTimeout(function(){
+		window.scrollTo(0, 0);
+		document.body.classList.add('onLoad');
+		document.querySelectorAll('[data-sta]').STA();
+	}, 500);
+});
+
+document.querySelector('.btn-top').addEventListener('click', function(){
+	window.scrollTo({
+		top: 0,
+		behavior: 'smooth'
+	});
+});
+
+window.addEventListener('scroll', function(){
+	var headerHeight = document.querySelector('.header').offsetHeight;
+
+	if(window.scrollY > headerHeight){
+		document.querySelector('.btn-top').classList.add('on');
+	}else{
+		document.querySelector('.btn-top').classList.remove('on');
+	}
+});
+</script>
+</body>
+</html>
