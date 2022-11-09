@@ -18,8 +18,9 @@ class SmartTab{
 		this.init();
 
 		let btnWrap = this.btnWrap;
+		let btns = this.btns;
 
-		this.btns.forEach(ele => {
+		btns.forEach(ele => {
 			ele.addEventListener('click', function(e){
 				e.preventDefault();
 	
@@ -40,9 +41,6 @@ class SmartTab{
 					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
 					document.getElementById(currentTabHash).focus();
 					window.scrollTo(0, winTop);
-
-					//callback
-					// callback && callback(this, this.dataset.index);
 				}
 			});
 		});
@@ -89,11 +87,17 @@ class SmartTab{
 		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssModeClass);
 	}
 
-	/*
 	changeTab(callback){
-		let options = this.options;
-		let btnWrap = this.btnWrap;
 		let btns = this.btns;
+
+		btns.forEach(ele => {
+			ele.addEventListener('click', function(){
+				callback && callback(
+					this,
+					document.getElementById(this.getAttribute('aria-controls')),
+					this.dataset.index
+				);
+			});
+		});
 	}
-	*/
 }
