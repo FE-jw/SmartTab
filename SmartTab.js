@@ -1,8 +1,8 @@
 /**
- * Version: 1
+ * Version: 1.0.1
  * Web: https://fe-jw.github.io/SmartTab
  * GitHub: https://github.com/FE-jw/SmartTab
- * Released: 2022-11-07
+ * Released: 2022-11-09
 */
 
 class SmartTab{
@@ -16,6 +16,36 @@ class SmartTab{
 
 		this.a11y();
 		this.init();
+
+		let btnWrap = this.btnWrap;
+
+		this.btns.forEach(ele => {
+			ele.addEventListener('click', function(e){
+				e.preventDefault();
+	
+				if(this.ariaSelected == 'false'){
+					//Not the first click
+					let _this = btnWrap.querySelector('a[aria-selected=true]');
+					let beforeTab = _this.getAttribute('aria-controls');
+
+					_this.ariaSelected = false;
+					_this.classList.remove(options.cssModeClass);
+					document.getElementById(beforeTab).classList.remove(options.cssModeClass);
+	
+					this.ariaSelected = true;
+					this.classList.add(options.cssModeClass);
+	
+					let winTop = window.scrollY;
+					let currentTabHash = this.getAttribute('aria-controls');
+					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
+					document.getElementById(currentTabHash).focus();
+					window.scrollTo(0, winTop);
+
+					//callback
+					// callback && callback(this, this.dataset.index);
+				}
+			});
+		});
 	}
 
 	a11y(){
@@ -59,37 +89,11 @@ class SmartTab{
 		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssModeClass);
 	}
 
+	/*
 	changeTab(callback){
 		let options = this.options;
 		let btnWrap = this.btnWrap;
 		let btns = this.btns;
-
-		btns.forEach(ele => {
-			ele.addEventListener('click', function(e){
-				e.preventDefault();
-	
-				if(this.ariaSelected == 'false'){
-					//Not the first click
-					let _this = btnWrap.querySelector('a[aria-selected=true]');
-					let beforeTab = _this.getAttribute('aria-controls');
-
-					_this.ariaSelected = false;
-					_this.classList.remove(options.cssModeClass);
-					document.getElementById(beforeTab).classList.remove(options.cssModeClass);
-	
-					this.ariaSelected = true;
-					this.classList.add(options.cssModeClass);
-	
-					let winTop = window.scrollY;
-					let currentTabHash = this.getAttribute('aria-controls');
-					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
-					document.getElementById(currentTabHash).focus();
-					window.scrollTo(0, winTop);
-
-					//callback
-					callback && callback(this, this.dataset.index);
-				}
-			});
-		});
 	}
+	*/
 }

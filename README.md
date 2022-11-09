@@ -65,12 +65,19 @@ This is a tab contents switching plugin.
 |firstTabIndex|number||Index of the first activation tab (Default is 0)|
 |tabOutline|boolean||Whether the tab outline style (Default is false)|
 
+<!-- 
 ## **SmartTab Method**
 
 |name|description|
 |---|---|
 |changeTab(evt, index)|Called after a tab switch. It takes 2 parameters, 1 is the element object and 2 is the index of the active tab.|
+ -->
+
 
 ## **Change Log**
+* 221109
+	* 1.0.1
+		* I found a bug in the "changeTab" method and removed it once. It will be added later.
 * 221107
-	* Released Ver 1
+	* 1.0.0
+		* FIrst Release

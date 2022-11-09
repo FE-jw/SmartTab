@@ -19,7 +19,7 @@
 		<div class="header-wrap">
 			<h1 class="main-tit" data-sta>
 				<span class="name">Smart Tab</span>
-				<span class="ver">Ver 1</span>
+				<span class="ver">Ver 1.0.1</span>
 			</h1>
 			<p class="main-desc">
 				<span class="desc" data-sta data-sta-delay="200">Tab Contents Switching Plugin</span>
@@ -114,6 +114,7 @@
 });</code></pre>
 						</div>
 					</li>
+					<!--  
 					<li data-sta>
 						<h3 class="step-tit">Method</h3>
 						<div class="code-wrap">
@@ -124,6 +125,7 @@ myTab.changeTab(function(evt, index){
 });</code></pre>
 						</div>
 					</li>
+					-->
 				</ol>
 				<a href="https://github.com/FE-jw/SmartTab" class="link-default arrow" target="_blank" data-sta>View on GiHub</a>
 			</div>
@@ -136,16 +138,7 @@ myTab.changeTab(function(evt, index){
 </div>
 <script src="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/js/highlight-8.7.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fe-jw/STA/Ver1.4/sta.min.js"></script>
-<script>
-	/**
-	 * Version: 1
-	 * Web: https://fe-jw.github.io/SmartTab
-	 * GitHub: https://github.com/FE-jw/SmartTab
-	 * Released: 2022-11-07
-	*/
-
-	class SmartTab{constructor(t){this.options=t,this.btnWrap=document.querySelector(t.btnEle),this.btnLists=Array.prototype.slice.call(this.btnWrap.querySelectorAll("li")),this.btns=Array.prototype.slice.call(this.btnWrap.querySelectorAll("a")),this.contents=Array.prototype.slice.call(document.querySelectorAll(t.contentEle)),this.currentActiveIndex=void 0!==t.firstTabIndex?t.firstTabIndex:0,this.a11y(),this.init()}a11y(){let t=this.options,e=this.btnWrap,s=this.btnLists,a=this.btns,i=this.contents;e.role="tablist",s.forEach((t,e)=>{t.role="none",t.querySelector("a").dataset.index=e}),a.forEach(t=>{t.role="tab",t.ariaSelected=!1,t.setAttribute("aria-controls",t.hash.replace("#",""))}),i.forEach(e=>{e.role="tabpanel",e.tabIndex=0,t.tabOutline||(e.style.outline="none")})}init(){let t=this.options,e=this.currentActiveIndex,s=document.querySelector('a[data-index="'+e+'"]');s.classList.add(t.cssModeClass),s.ariaSelected=!0,document.getElementById(s.getAttribute("aria-controls")).classList.add(t.cssModeClass)}changeTab(t){let e=this.options,s=this.btnWrap,a=this.btns;a.forEach(a=>{a.addEventListener("click",function(a){if(a.preventDefault(),"false"==this.ariaSelected){let a=s.querySelector("a[aria-selected=true]"),i=a.getAttribute("aria-controls");a.ariaSelected=!1,a.classList.remove(e.cssModeClass),document.getElementById(i).classList.remove(e.cssModeClass),this.ariaSelected=!0,this.classList.add(e.cssModeClass);let l=window.scrollY,r=this.getAttribute("aria-controls");document.getElementById(r).classList.add(e.cssModeClass),document.getElementById(r).focus(),window.scrollTo(0,l),t&&t(this,this.dataset.index)}})})}}
-</script>
+<script src="SmartTab.min.js"></script>
 <script>
 hljs.initHighlightingOnLoad();
 
@@ -156,10 +149,12 @@ const myTab = new SmartTab({
 });
 
 //changeTab Method
+/*
 myTab.changeTab(function(evt, index){
 	console.log('evt: ', evt);
 	console.log('currentActiveIndex: ', index);
 });
+*/
 
 window.addEventListener('load', function(){
 	//Loading
