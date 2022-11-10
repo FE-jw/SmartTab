@@ -33,35 +33,6 @@
 				<h2 class="sub-tit" data-sta>Example</h2>
 				<p class="sub-desc" data-sta>Click the tab button <br data-break-1>to move the focus to that content.<br>Click the tab button and <br data-break-1>press the keyboard Tab key.</p>
 				<div class="tab-wrap" data-sta data-sta-offsete="0.3">
-					<ul class="tab-btn">
-						<li><a href="#ST-1">Tab 1</a></li>
-						<li><a href="#ST-2">Tab 2</a></li>
-						<li><a href="#ST-3">Tab 3</a></li>
-					</ul>
-					<div id="ST-1" class="tab-content">
-						Tab 1
-						<br><br>
-						<button type="button">Focus Test</button>
-						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
-					</div>
-					<div id="ST-2" class="tab-content">
-						Tab 2
-						<br><br>
-						<button type="button">Focus Test</button>
-						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
-					</div>
-					<div id="ST-3" class="tab-content">
-						Tab 3
-						<br><br>
-						<button type="button">Focus Test</button>
-						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
-					</div>
-				</div>
-				<!--  
-				<div class="tab-wrap" data-sta data-sta-offsete="0.3">
 					<ul class="tab-btn-1">
 						<li><a href="#ST-1">Tab 1</a></li>
 						<li><a href="#ST-2">Tab 2</a></li>
@@ -100,24 +71,23 @@
 						<br><br>
 						<button type="button">Focus Test</button>
 						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa rerum cum unde? Ipsa perspiciatis quo molestiae sint magni officia amet consequatur illum cumque. Blanditiis, reprehenderit.</p>
 					</div>
 					<div id="ST-5" class="tab-content-2">
 						Tab 5
 						<br><br>
 						<button type="button">Focus Test</button>
 						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa rerum cum unde? Ipsa perspiciatis quo molestiae sint magni officia amet consequatur illum cumque. Blanditiis, reprehenderit.</p>
 					</div>
 					<div id="ST-6" class="tab-content-2">
 						Tab 6
 						<br><br>
 						<button type="button">Focus Test</button>
 						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa rerum cum unde? Ipsa perspiciatis quo molestiae sint magni officia amet consequatur illum cumque. Blanditiis, reprehenderit.</p>
 					</div>
 				</div>
-				-->
 			</div>
 		</section>
 		<div class="section start">
@@ -201,22 +171,6 @@ myTab.changeTab(function(evt, index){
 <script>
 hljs.initHighlightingOnLoad();
 
-const myTab = new SmartTab({
-	btnEle: '.tab-btn',
-	contentEle: '.tab-content',
-	cssModeClass: 'active'
-});
-
-console.log('myTab', myTab);
-
-//changeTab Method
-myTab.changeTab(function(btn, content, index){
-	console.log('btn:', btn);
-	console.log('content:', content);
-	console.log('currentActiveIndex:', index);
-});
-
-/*
 const myTab_1 = new SmartTab({
 	btnEle: '.tab-btn-1',
 	contentEle: '.tab-content-1',
@@ -228,7 +182,19 @@ const myTab_2 = new SmartTab({
 	contentEle: '.tab-content-2',
 	cssModeClass: 'active'
 });
-*/
+
+//changeTab Method
+myTab_1.changeTab(function(btn, content, currentIndex){
+	console.log('btn:', btn);
+	console.log('content:', content);
+	console.log('currentIndex:', currentIndex);
+});
+
+myTab_2.changeTab(function(btn, content, currentIndex){
+	console.log('btn:', btn);
+	console.log('content:', content);
+	console.log('currentIndex:', currentIndex);
+});
 
 window.addEventListener('load', function(){
 	//Loading

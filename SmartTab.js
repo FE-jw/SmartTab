@@ -14,13 +14,35 @@ class SmartTab{
 		this.contents = Array.prototype.slice.call(document.querySelectorAll(options.contentEle));
 		this.currentActiveIndex = typeof options.firstTabIndex !== 'undefined' ? options.firstTabIndex : 0;
 
-		this.a11y();
-		this.init();
+		//A11Y
+		this.btnWrap.role = 'tablist';
+		this.btnLists.forEach((li, index) => {
+			li.role = 'none'
+			li.querySelector('a').dataset.index = index;
+		});
+		this.btns.forEach(btn => {
+			btn.role = 'tab';
+			btn.ariaSelected = false;
+			btn.setAttribute('aria-controls', btn.hash.replace('#', ''));
+		});
+		this.contents.forEach(content => {
+			content.role = 'tabpanel';
+			content.tabIndex = 0;
+	
+			if(!options.tabOutline){
+				content.style.outline = 'none';
+			}
+		});
+	
+		//Initialize(First Active Tab)
+		let initTab = this.btnWrap.querySelector('a[data-index="' + this.currentActiveIndex + '"]');
+		initTab.classList.add(options.cssModeClass);
+		initTab.ariaSelected = true;
+		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssModeClass);
 
+		//Click Tab Button
 		let btnWrap = this.btnWrap;
-		let btns = this.btns;
-
-		btns.forEach(ele => {
+		this.btns.forEach(ele => {
 			ele.addEventListener('click', function(e){
 				e.preventDefault();
 	
@@ -46,51 +68,8 @@ class SmartTab{
 		});
 	}
 
-	a11y(){
-		let options = this.options;
-		let btnWrap = this.btnWrap;
-		let btnLists = this.btnLists;
-		let btns = this.btns;
-		let contents = this.contents;
-
-		btnWrap.role = 'tablist';
-		
-		btnLists.forEach((ele, index) => {
-			ele.role = 'none'
-			ele.querySelector('a').dataset.index = index;
-		});
-	
-		btns.forEach(ele => {
-			ele.role = 'tab';
-			ele.ariaSelected = false;
-			ele.setAttribute('aria-controls', ele.hash.replace('#', ''));
-		});
-	
-		contents.forEach(ele => {
-			ele.role = 'tabpanel';
-			ele.tabIndex = 0;
-	
-			if(!options.tabOutline){
-				ele.style.outline = 'none';
-			}
-		});
-	}
-
-	init(){
-		let options = this.options;
-		let currentActiveIndex = this.currentActiveIndex;
-	
-		//First Active Tab
-		let initTab = document.querySelector('a[data-index="' + currentActiveIndex + '"]');
-		initTab.classList.add(options.cssModeClass);
-		initTab.ariaSelected = true;
-		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssModeClass);
-	}
-
 	changeTab(callback){
-		let btns = this.btns;
-
-		btns.forEach(ele => {
+		this.btns.forEach(ele => {
 			ele.addEventListener('click', function(){
 				callback && callback(
 					this,
