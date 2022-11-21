@@ -77,19 +77,4 @@ class SmartTab{
 			});
 		});
 	}
-
-	changeTab(callback){
-		console.log('changeTab');
-		/*
-		this.btns.forEach(ele => {
-			ele.addEventListener('click', function(){
-				callback && callback(
-					this,
-					document.getElementById(this.getAttribute('aria-controls')),
-					this.dataset.index
-				);
-			});
-		});
-		*/
-	}
 }
