@@ -1,8 +1,8 @@
 /**
- * Version: 1.1.0
+ * Version: 1.0.2
  * Web: https://fe-jw.github.io/SmartTab
  * GitHub: https://github.com/FE-jw/SmartTab
- * Released: 2022-##-##
+ * Released: 2022-11-28
 */
 
 class SmartTab{
@@ -67,10 +67,10 @@ class SmartTab{
 	
 					ele.ariaSelected = true;
 					ele.classList.add(this.options.cssModeClass);
-	
-					let winTop = window.scrollY;
+
 					let currentTabHash = ele.getAttribute('aria-controls');
 					document.getElementById(currentTabHash).classList.add(this.options.cssModeClass);
+					let winTop = window.scrollY;
 					document.getElementById(currentTabHash).focus();
 					window.scrollTo(0, winTop);
 				}
