@@ -75,9 +75,10 @@ This is a tab contents switching plugin.
 
 
 ## **Change Log**
-* 221109
-	* 1.0.1
-		* I found a bug in the "changeTab" method and removed it once. It will be added later.
-* 221107
-	* 1.0.0
-		* FIrst Release
+* 221128 v1.0.2
+	* Bug Fix
+		* Scrolling moves when clicking the tab button
+* 221109 v1.0.1
+	* I found a bug in the "changeTab" method and removed it once. It will be added later.
+* 221107 v1.0.0
+	* FIrst Release

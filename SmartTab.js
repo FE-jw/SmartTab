@@ -1,8 +1,8 @@
 /**
- * Version: 1.0.1
+ * Version: 1.0.2
  * Web: https://fe-jw.github.io/SmartTab
  * GitHub: https://github.com/FE-jw/SmartTab
- * Released: 2022-11-09
+ * Released: 2022-11-28
 */
 
 class SmartTab{
@@ -14,86 +14,67 @@ class SmartTab{
 		this.contents = Array.prototype.slice.call(document.querySelectorAll(options.contentEle));
 		this.currentActiveIndex = typeof options.firstTabIndex !== 'undefined' ? options.firstTabIndex : 0;
 
-		this.a11y();
-		this.init();
-
-		let btnWrap = this.btnWrap;
-
-		this.btns.forEach(ele => {
-			ele.addEventListener('click', function(e){
-				e.preventDefault();
-	
-				if(this.ariaSelected == 'false'){
-					//Not the first click
-					let _this = btnWrap.querySelector('a[aria-selected=true]');
-					let beforeTab = _this.getAttribute('aria-controls');
-
-					_this.ariaSelected = false;
-					_this.classList.remove(options.cssModeClass);
-					document.getElementById(beforeTab).classList.remove(options.cssModeClass);
-	
-					this.ariaSelected = true;
-					this.classList.add(options.cssModeClass);
-	
-					let winTop = window.scrollY;
-					let currentTabHash = this.getAttribute('aria-controls');
-					document.getElementById(currentTabHash).classList.add(options.cssModeClass);
-					document.getElementById(currentTabHash).focus();
-					window.scrollTo(0, winTop);
-
-					//callback
-					// callback && callback(this, this.dataset.index);
-				}
-			});
-		});
+		this.initialize();
 	}
 
 	a11y(){
-		let options = this.options;
-		let btnWrap = this.btnWrap;
-		let btnLists = this.btnLists;
-		let btns = this.btns;
-		let contents = this.contents;
+		//A11Y
+		this.btnWrap.role = 'tablist';
 
-		btnWrap.role = 'tablist';
+		this.btnLists.forEach((li, index) => {
+			li.role = 'none'
+			li.querySelector('a').dataset.index = index;
+		});
+
+		this.btns.forEach(btn => {
+			btn.role = 'tab';
+			btn.ariaSelected = false;
+			btn.setAttribute('aria-controls', btn.hash.replace('#', ''));
+		});
 		
-		btnLists.forEach((ele, index) => {
-			ele.role = 'none'
-			ele.querySelector('a').dataset.index = index;
-		});
+		this.contents.forEach(content => {
+			content.role = 'tabpanel';
+			content.tabIndex = 0;
 	
-		btns.forEach(ele => {
-			ele.role = 'tab';
-			ele.ariaSelected = false;
-			ele.setAttribute('aria-controls', ele.hash.replace('#', ''));
-		});
-	
-		contents.forEach(ele => {
-			ele.role = 'tabpanel';
-			ele.tabIndex = 0;
-	
-			if(!options.tabOutline){
-				ele.style.outline = 'none';
+			if(!this.options.tabOutline){
+				content.style.outline = 'none';
 			}
 		});
 	}
 
-	init(){
-		let options = this.options;
-		let currentActiveIndex = this.currentActiveIndex;
-	
-		//First Active Tab
-		let initTab = document.querySelector('a[data-index="' + currentActiveIndex + '"]');
-		initTab.classList.add(options.cssModeClass);
-		initTab.ariaSelected = true;
-		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(options.cssModeClass);
-	}
+	initialize(){
+		this.a11y();
 
-	/*
-	changeTab(callback){
-		let options = this.options;
-		let btnWrap = this.btnWrap;
-		let btns = this.btns;
+		//Initialize(First Active Tab)
+		let initTab = this.btnWrap.querySelector('a[data-index="' + this.currentActiveIndex + '"]');
+		initTab.classList.add(this.options.cssModeClass);
+		initTab.ariaSelected = true;
+		document.getElementById(initTab.getAttribute('aria-controls')).classList.add(this.options.cssModeClass);
+
+		//Click Tab Button
+		this.btns.forEach(ele => {
+			ele.addEventListener('click', (e) => {
+				e.preventDefault();
+
+				if(ele.ariaSelected == 'false'){
+					//Not the first click
+					let _this = this.btnWrap.querySelector('a[aria-selected=true]');
+					let beforeTab = _this.getAttribute('aria-controls');
+
+					_this.ariaSelected = false;
+					_this.classList.remove(this.options.cssModeClass);
+					document.getElementById(beforeTab).classList.remove(this.options.cssModeClass);
+	
+					ele.ariaSelected = true;
+					ele.classList.add(this.options.cssModeClass);
+
+					let currentTabHash = ele.getAttribute('aria-controls');
+					document.getElementById(currentTabHash).classList.add(this.options.cssModeClass);
+					let winTop = window.scrollY;
+					document.getElementById(currentTabHash).focus();
+					window.scrollTo(0, winTop);
+				}
+			});
+		});
 	}
-	*/
 }

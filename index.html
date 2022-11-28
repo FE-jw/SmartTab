@@ -19,7 +19,7 @@
 		<div class="header-wrap">
 			<h1 class="main-tit" data-sta>
 				<span class="name">Smart Tab</span>
-				<span class="ver">Ver 1.0.1</span>
+				<span class="ver">Ver 1.0.2</span>
 			</h1>
 			<p class="main-desc">
 				<span class="desc" data-sta data-sta-delay="200">Tab Contents Switching Plugin</span>
@@ -33,31 +33,59 @@
 				<h2 class="sub-tit" data-sta>Example</h2>
 				<p class="sub-desc" data-sta>Click the tab button <br data-break-1>to move the focus to that content.<br>Click the tab button and <br data-break-1>press the keyboard Tab key.</p>
 				<div class="tab-wrap" data-sta data-sta-offsete="0.3">
-					<ul class="tab-btn">
+					<ul class="tab-btn-1">
 						<li><a href="#ST-1">Tab 1</a></li>
 						<li><a href="#ST-2">Tab 2</a></li>
 						<li><a href="#ST-3">Tab 3</a></li>
 					</ul>
-					<div id="ST-1" class="tab-content">
+					<div id="ST-1" class="tab-content-1">
 						Tab 1
 						<br><br>
 						<button type="button">Focus Test</button>
 						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus atque hic consectetur facere asperiores mollitia doloribus quasi aliquid laboriosam iusto dolores, incidunt perferendis debitis pariatur cum alias nostrum saepe recusandae.</p>
 					</div>
-					<div id="ST-2" class="tab-content">
+					<div id="ST-2" class="tab-content-1">
 						Tab 2
 						<br><br>
 						<button type="button">Focus Test</button>
 						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus atque hic consectetur facere asperiores mollitia doloribus quasi aliquid laboriosam iusto dolores, incidunt perferendis debitis pariatur cum alias nostrum saepe recusandae.</p>
 					</div>
-					<div id="ST-3" class="tab-content">
+					<div id="ST-3" class="tab-content-1">
 						Tab 3
 						<br><br>
 						<button type="button">Focus Test</button>
 						<br><br>
-						<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur officia accusantium quas omnis cum inventore sed consequuntur repellendus eveniet quod deserunt esse alias soluta vitae, facilis corrupti, dolore eius iure?</p>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus atque hic consectetur facere asperiores mollitia doloribus quasi aliquid laboriosam iusto dolores, incidunt perferendis debitis pariatur cum alias nostrum saepe recusandae.</p>
+					</div>
+				</div>
+				<div class="tab-wrap" data-sta data-sta-offsete="0.3">
+					<ul class="tab-btn-2">
+						<li><a href="#ST-4">Tab 4</a></li>
+						<li><a href="#ST-5">Tab 5</a></li>
+						<li><a href="#ST-6">Tab 6</a></li>
+					</ul>
+					<div id="ST-4" class="tab-content-2">
+						Tab 4
+						<br><br>
+						<button type="button">Focus Test</button>
+						<br><br>
+						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci veniam nesciunt porro accusamus dicta iste ullam nihil reprehenderit sed at.</p>
+					</div>
+					<div id="ST-5" class="tab-content-2">
+						Tab 5
+						<br><br>
+						<button type="button">Focus Test</button>
+						<br><br>
+						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci veniam nesciunt porro accusamus dicta iste ullam nihil reprehenderit sed at.</p>
+					</div>
+					<div id="ST-6" class="tab-content-2">
+						Tab 6
+						<br><br>
+						<button type="button">Focus Test</button>
+						<br><br>
+						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci veniam nesciunt porro accusamus dicta iste ullam nihil reprehenderit sed at.</p>
 					</div>
 				</div>
 			</div>
@@ -138,23 +166,29 @@ myTab.changeTab(function(evt, index){
 </div>
 <script src="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/js/highlight-8.7.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fe-jw/STA/Ver1.4/sta.min.js"></script>
-<script src="SmartTab.min.js"></script>
+<script>
+/**
+ * Version: 1.0.2
+ * Web: https://fe-jw.github.io/SmartTab
+ * GitHub: https://github.com/FE-jw/SmartTab
+ * Released: 2022-11-28
+*/
+class SmartTab{constructor(t){this.options=t,this.btnWrap=document.querySelector(t.btnEle),this.btnLists=Array.prototype.slice.call(this.btnWrap.querySelectorAll("li")),this.btns=Array.prototype.slice.call(this.btnWrap.querySelectorAll("a")),this.contents=Array.prototype.slice.call(document.querySelectorAll(t.contentEle)),this.currentActiveIndex=void 0!==t.firstTabIndex?t.firstTabIndex:0,this.initialize()}a11y(){this.btnWrap.role="tablist",this.btnLists.forEach((t,e)=>{t.role="none",t.querySelector("a").dataset.index=e}),this.btns.forEach(t=>{t.role="tab",t.ariaSelected=!1,t.setAttribute("aria-controls",t.hash.replace("#",""))}),this.contents.forEach(t=>{t.role="tabpanel",t.tabIndex=0,this.options.tabOutline||(t.style.outline="none")})}initialize(){this.a11y();let t=this.btnWrap.querySelector('a[data-index="'+this.currentActiveIndex+'"]');t.classList.add(this.options.cssModeClass),t.ariaSelected=!0,document.getElementById(t.getAttribute("aria-controls")).classList.add(this.options.cssModeClass),this.btns.forEach(t=>{t.addEventListener("click",e=>{if(e.preventDefault(),"false"==t.ariaSelected){let e=this.btnWrap.querySelector("a[aria-selected=true]"),s=e.getAttribute("aria-controls");e.ariaSelected=!1,e.classList.remove(this.options.cssModeClass),document.getElementById(s).classList.remove(this.options.cssModeClass),t.ariaSelected=!0,t.classList.add(this.options.cssModeClass);let i=t.getAttribute("aria-controls");document.getElementById(i).classList.add(this.options.cssModeClass);let a=window.scrollY;document.getElementById(i).focus(),window.scrollTo(0,a)}})})}}
+</script>
 <script>
 hljs.initHighlightingOnLoad();
 
-const myTab = new SmartTab({
-	btnEle: '.tab-btn',
-	contentEle: '.tab-content',
+const myTab_1 = new SmartTab({
+	btnEle: '.tab-btn-1',
+	contentEle: '.tab-content-1',
 	cssModeClass: 'active'
 });
 
-//changeTab Method
-/*
-myTab.changeTab(function(evt, index){
-	console.log('evt: ', evt);
-	console.log('currentActiveIndex: ', index);
+const myTab_2 = new SmartTab({
+	btnEle: '.tab-btn-2',
+	contentEle: '.tab-content-2',
+	cssModeClass: 'active'
 });
-*/
 
 window.addEventListener('load', function(){
 	//Loading
