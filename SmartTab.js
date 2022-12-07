@@ -2,7 +2,7 @@
  * Version: 1.0.3
  * Web: https://fe-jw.github.io/SmartTab
  * GitHub: https://github.com/FE-jw/SmartTab
- * Released: 2022-12-##
+ * Released: 2022-12-07
 */
 
 class SmartTab{

@@ -75,7 +75,7 @@ This is a tab contents switching plugin.
 
 
 ## **Change Log**
-* 22#### v1.0.3
+* 221207 v1.0.3
 	* Bug Fix
 		* When the tab key is pressed after clicking the tab button again, the focus moves to the next tab key.
 * 221128 v1.0.2

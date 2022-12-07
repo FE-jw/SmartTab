@@ -166,7 +166,15 @@ myTab.changeTab(function(evt, index){
 </div>
 <script src="https://cdn.jsdelivr.net/gh/fe-jw/SmartTab/js/highlight-8.7.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fe-jw/STA/Ver1.5/sta.min.js"></script>
-<script src="SmartTab.js"></script>
+<script>
+/**
+ * Version: 1.0.3
+ * Web: https://fe-jw.github.io/SmartTab
+ * GitHub: https://github.com/FE-jw/SmartTab
+ * Released: 2022-12-07
+*/
+class SmartTab{constructor(t){this.options=t,this.btnWrap=document.querySelector(t.btnEle),this.btnLists=Array.prototype.slice.call(this.btnWrap.querySelectorAll("li")),this.btns=Array.prototype.slice.call(this.btnWrap.querySelectorAll("a")),this.contents=Array.prototype.slice.call(document.querySelectorAll(t.contentEle)),this.currentActiveIndex=void 0!==t.firstTabIndex?t.firstTabIndex:0,this.initialize()}a11y(){this.btnWrap.role="tablist",this.btnLists.forEach(t=>{t.role="none"}),this.btns.forEach((t,e)=>{t.role="tab",t.ariaSelected=!1,t.dataset.index=e,t.setAttribute("aria-controls",t.hash.replace("#",""))}),this.contents.forEach(t=>{t.role="tabpanel",t.tabIndex=0,this.options.tabOutline||(t.style.outline="none")})}initialize(){this.a11y();let t=this.btnWrap.querySelector('a[data-index="'+this.currentActiveIndex+'"]');t.classList.add(this.options.cssModeClass),t.ariaSelected=!0,document.getElementById(t.getAttribute("aria-controls")).classList.add(this.options.cssModeClass),this.btns.forEach(t=>{t.addEventListener("click",e=>{if(e.preventDefault(),"false"==t.ariaSelected){let e=this.btnWrap.querySelector("a[aria-selected=true]"),s=e.getAttribute("aria-controls");e.ariaSelected=!1,e.classList.remove(this.options.cssModeClass),document.getElementById(s).classList.remove(this.options.cssModeClass),t.ariaSelected=!0,t.classList.add(this.options.cssModeClass)}let s=t.getAttribute("aria-controls");document.getElementById(s).classList.add(this.options.cssModeClass);let i=window.scrollY;document.getElementById(s).focus(),window.scrollTo(0,i)})})}}
+</script>
 <script>
 hljs.initHighlightingOnLoad();
 
