@@ -24,6 +24,8 @@ li, dd	{list-style:none;}
 .skip-content:focus	{display:block;width:100%;top:0;line-height:50px;font-weight:bold;color:#fff;text-align:center;background-color:$symbol-color;z-index:1000;}
 ::-webkit-scrollbar	{width:10px;height:4px;background-color:rgba(255, 255, 255, 0.1);}
 ::-webkit-scrollbar-thumb	{border-radius:50em;background-color:$symbol-color;}
+pre	{min-width:0;padding:10px 0;overflow-x:auto;}
+pre code.hljs	{overflow-x:visible;}
 
 //Loading
 body	{
@@ -167,7 +169,7 @@ body	{
 			.how-to-start li	{margin-bottom:40px;}
 			.how-to-start .step-tit	{font-size:3.0rem;}
 			.how-to-start .code-wrap	{font-size:2.0rem;}
-			.code-list [class^='item-']	{min-width:300px;max-width:1000px;min-height:300px;padding:0 20px;border-width:2px;font-size:2.0rem;}
+			.code-list [class^='item-']	{min-width:300px;max-width:1000px;min-height:250px;padding:20px;border-width:2px;font-size:2.0rem;}
 		}
 
 		.footer	{padding:60px 0 30px;

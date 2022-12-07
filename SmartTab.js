@@ -1,8 +1,8 @@
 /**
- * Version: 1.0.2
+ * Version: 1.0.3
  * Web: https://fe-jw.github.io/SmartTab
  * GitHub: https://github.com/FE-jw/SmartTab
- * Released: 2022-11-28
+ * Released: 2022-12-##
 */
 
 class SmartTab{
@@ -21,14 +21,14 @@ class SmartTab{
 		//A11Y
 		this.btnWrap.role = 'tablist';
 
-		this.btnLists.forEach((li, index) => {
-			li.role = 'none'
-			li.querySelector('a').dataset.index = index;
+		this.btnLists.forEach(li => {
+			li.role = 'none';
 		});
 
-		this.btns.forEach(btn => {
+		this.btns.forEach((btn, index) => {
 			btn.role = 'tab';
 			btn.ariaSelected = false;
+			btn.dataset.index = index;
 			btn.setAttribute('aria-controls', btn.hash.replace('#', ''));
 		});
 		
@@ -67,13 +67,13 @@ class SmartTab{
 	
 					ele.ariaSelected = true;
 					ele.classList.add(this.options.cssModeClass);
-
-					let currentTabHash = ele.getAttribute('aria-controls');
-					document.getElementById(currentTabHash).classList.add(this.options.cssModeClass);
-					let winTop = window.scrollY;
-					document.getElementById(currentTabHash).focus();
-					window.scrollTo(0, winTop);
 				}
+
+				let currentTabHash = ele.getAttribute('aria-controls');
+				document.getElementById(currentTabHash).classList.add(this.options.cssModeClass);
+				let winTop = window.scrollY;
+				document.getElementById(currentTabHash).focus();
+				window.scrollTo(0, winTop);
 			});
 		});
 	}

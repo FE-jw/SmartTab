@@ -75,9 +75,12 @@ This is a tab contents switching plugin.
 
 
 ## **Change Log**
+* 22#### v1.0.3
+	* Bug Fix
+		* When the tab key is pressed after clicking the tab button again, the focus moves to the next tab key.
 * 221128 v1.0.2
 	* Bug Fix
-		* Scrolling moves when clicking the tab button
+		* Scrolling moves when clicking the tab button.
 * 221109 v1.0.1
 	* I found a bug in the "changeTab" method and removed it once. It will be added later.
 * 221107 v1.0.0
