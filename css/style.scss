@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/*! Author: JW 2022-11-10. Edit: 2022-11-28 */
+/*! Author: JW 2022-11-10. Edit: 2022-12-07 */
 $font: 'Roboto-Regular', 'NanumSquareR', sans-serif;
 $font-light: 'Roboto-Light', 'NanumSquareL', sans-serif;
 $font-bold: 'Roboto-Bold', 'NanumSquareExtraBold', sans-serif;
@@ -144,8 +144,8 @@ body	{
 	.st-wrap	{
 		br[data-break-1]	{display:none;}
 		&:before	{background-size:1920px auto;}
-		.link-default	{width:280px;height:80px;font-size:3.0rem;
-			&.arrow:hover:after	{width:20px;height:20px;margin-left:10px;}
+		.link-default	{width:280px;height:80px;font-size:2.5rem;
+			&.arrow:hover:after	{width:18px;height:18px;margin-left:10px;}
 		}
 
 		.header	{width:1440px;margin:0 auto;padding:60px 0;
